@@ -18,7 +18,7 @@ A web application for visualizing and animating geometric transformations of par
   <img src="assets/screen1.png" width="80%">
 </p>
 <p align="center">
-  <img src="assets/screen1.png" width="80%">
+  <img src="assets/screen2.png" width="80%">
 </p>
 ## 🚀 Quick Start
 
