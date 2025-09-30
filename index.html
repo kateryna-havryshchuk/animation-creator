@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Coordinate Plane with Parallelogram Animation</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="canvas-container">
+            <h1>Інтерактивна координатна площина</h1>
+            <canvas id="coordinatePlane"></canvas>
+            <div id="message" class="message" style="display: none;"></div>
+        </div>
+       
+        <div class="control-panel">
+            <div class="header">
+                <h2>Панель керування</h2>
+                <div class="theme-switch">
+                    <span>🌙</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span>☀️</span>
+                </div>
+            </div>
+            
+            <!-- Main grid settings -->
+            <div class="settings-section">
+                <h3>Налаштування сітки</h3>
+                <div class="form-group">
+                    <label for="unitLength">Одиничний відрізок (px):</label>
+                    <input type="range" id="unitLength" min="20" max="100" value="50">
+                    <input type="number" id="unitLengthNumber" min="20" max="100" value="50">
+                </div>
+                <div class="form-group">
+                    <label for="gridStep">Крок сітки:</label>
+                    <input type="range" id="gridStep" min="1" max="5" value="1" step="1">
+                    <input type="number" id="gridStepNumber" min="1" max="5" value="1" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="axisColor">Колір осей:</label>
+                    <input type="color" id="axisColor" value="#000000" style="width: 100%; height: 30px; border-radius: 5px;">
+                </div>
+                <div class="form-group">
+                    <label for="gridColor">Колір сітки:</label>
+                    <input type="color" id="gridColor" value="#cccccc" style="width: 100%; height: 30px;">
+                </div>
+            </div>
+            
+            <!-- Parallelogram settings -->
+            <div class="settings-section">
+                <h3>Паралелограм</h3>
+                
+                <!-- Vertex inputs -->
+                <div class="vertex-inputs">
+                    <div class="vertex-group">
+                        <label>Вершина 1:</label>
+                        <div class="coord-inputs">
+                            <input type="number" id="x1" placeholder="X" value="2" step="0.5">
+                            <input type="number" id="y1" placeholder="Y" value="2" step="0.5">
+                        </div>
+                    </div>
+                    <div class="vertex-group">
+                        <label>Вершина 2:</label>
+                        <div class="coord-inputs">
+                            <input type="number" id="x2" placeholder="X" value="4" step="0.5">
+                            <input type="number" id="y2" placeholder="Y" value="2" step="0.5">
+                        </div>
+                    </div>
+                    <div class="vertex-group">
+                        <label>Вершина 3:</label>
+                        <div class="coord-inputs">
+                            <input type="number" id="x3" placeholder="X" value="5" step="0.5">
+                            <input type="number" id="y3" placeholder="Y" value="4" step="0.5">
+                        </div>
+                    </div>
+                    <div class="vertex-group">
+                        <label>Вершина 4:</label>
+                        <div class="coord-inputs">
+                            <input type="number" id="x4" placeholder="X" value="3" step="0.5">
+                            <input type="number" id="y4" placeholder="Y" value="4" step="0.5">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Animation settings -->
+                <div class="form-group">
+                    <label for="pivotVertex">Центр обертання:</label>
+                    <select id="pivotVertex">
+                        <option value="0">Вершина 1</option>
+                        <option value="1">Вершина 2</option>
+                        <option value="2">Вершина 3</option>
+                        <option value="3">Вершина 4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scaleFactor">Коефіцієнт зменшення (A):</label>
+                    <input type="number" id="scaleFactor" min="-1001" max="1001" value="2" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="animationSpeed">Швидкість анімації (рад/кадр):</label>
+                    <div class="input-with-label">
+                        <input type="range" id="animationSpeed" min="0.01" max="0.1" value="0.02" step="0.01">
+                        <span id="animationSpeedValue">0.02</span>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button id="createParallelogram">Створити паралелограм</button>
+                </div>
+                <div class="button-group">
+                    <button id="startAnimation">Почати рух</button>
+                    <button id="resetAnimation">Скинути</button>
+                </div>
+                <div class="button-group">
+                    <button id="saveMatrix">Зберегти матрицю</button>
+                    <button id="saveParallelogram">Зберегти фігуру</button>
+                </div>
+                <div class="form-group">
+                    <label for="loadParallelogram">Завантажити фігуру:</label>
+                    <input type="file" id="loadParallelogram" accept=".json">
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="applySettings">Застосувати налаштування</button>
+                <button class="reset-btn" id="resetSettings">Скинути</button>
+            </div>
+            <div>
+                <div class="coords-display" id="coords-display">Координати: (0, 0)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
